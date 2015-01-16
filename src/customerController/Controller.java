@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Model;
-import databeans.User;
+import databeans.Customer;
 
 @SuppressWarnings("serial")
 public class Controller extends HttpServlet {
@@ -19,16 +19,8 @@ public class Controller extends HttpServlet {
 	public void init() throws ServletException {
         Model model = new Model(getServletConfig());
         
-        Action.add(new AddAction(model));
-        Action.add(new ChangePwdAction(model));
-        Action.add(new ListAction(model));
         Action.add(new LoginAction(model));
-        Action.add(new LogoutAction(model));
-        Action.add(new ManageAction(model));
-        Action.add(new RegisterAction(model));
-        Action.add(new DeleteAction(model));
-        Action.add(new ViewAction(model));
-    }
+  }
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
@@ -42,13 +34,13 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
-        User        user = (User) session.getAttribute("user");
+        Customer    customer = (Customer) session.getAttribute("customer");
         String      action = getActionName(servletPath);
         
-        if (user == null) {
+        if (customer == null) {
         	
         	// If the user hasn't logged in, so login is the only option
-        	if (action.equals("register.do") || action.equals("login.do") || action.equals("list.do") || action.equals("view.do")) {
+        	if (action.equals("login.do") || action.equals("list.do") || action.equals("view.do")) {
     			return Action.perform(action,request);
             }
         	else {
