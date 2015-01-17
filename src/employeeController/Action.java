@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class Action {
 	 // Returns the name of the action, used to match the request in the hash table
     public abstract String getName();
-    	
+
     // Returns the name of the jsp used to render the output.
     public abstract String perform(HttpServletRequest request);
 

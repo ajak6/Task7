@@ -6,7 +6,7 @@ import org.genericdao.PrimaryKey;
 public class Customer {
 	private int customer_id, zip;
 	private String username, password, firstName, lastName, addr_line1, addr_line2, city, state;
-	private double cash;   // 2 decimal 
+	private long cash;   // 2 decimal 
 
 	//Getter
 	public int getCustomer_id() {
@@ -49,7 +49,7 @@ public class Customer {
 		return state;
 	}
 	
-	public double getCash() {
+	public long getCash() {
 		return cash;
 	}
 	
@@ -91,7 +91,7 @@ public class Customer {
 		zip = i;
 	}
 	
-	public void setCash(double l) {
+	public void setCash(long l) {
 		cash = l;
 	}
 }
