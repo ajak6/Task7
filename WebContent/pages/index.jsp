@@ -48,7 +48,9 @@
                     <a href="ViewAccount_c.jsp"><button type="button" class="btn btn-lg btn-info btn-block">Customer Login</button></a>
                 </div>
                 <div class="col-md-6 column">
-                    <a href="ViewAccount_e.jsp"><button type="button" class="btn btn-block btn-warning btn-lg">Employee Login</button></a>
+                   <!--  <a href="ViewAccount_e.jsp"><button type="button" class="btn btn-block btn-warning btn-lg">Employee Login</button></a> -->
+                   <!-- it will go to controller to see if session is active then show dashboard else show login page -->
+                   <a href="ViewAccount_e.jsp"><button type="button" class="btn btn-block btn-warning btn-lg">Employee Login</button></a>
                 </div>
             </div>
         </div>

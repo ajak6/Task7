@@ -89,9 +89,20 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                        <!-- Registration links -->
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> Creat Account </a>
+                           <a> <i class="fa fa-files-o fa-fw"></i> Registration Panel<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="custRegistration.doe">New Customer Registration</a>
+                                </li>
+                                <li>
+                                    <a href="employeeRegister.doe">New Employee Registration</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
+                        <!-- registration links ends -->
                         <li>
                             <a href="#"><i class="fa fa-rotate-right fa-fw"></i> Reset Customer Password </a>
                         </li>

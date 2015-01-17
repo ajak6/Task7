@@ -19,6 +19,8 @@ public class Controller extends HttpServlet {
         Model model = new Model(getServletConfig());
         
         Action.add(new LoginAction(model));
+        Action.add(new CustRegisterAction(model));
+     
   }
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,27 +35,28 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
-        Employee    employee = (Employee) session.getAttribute("employee");
+      //  Employee    employee = (Employee) session.getAttribute("employee");
         String      action = getActionName(servletPath);
-        
-        if (employee == null) {
-        	
-        	// If the user hasn't logged in, so login is the only option
-        	if (action.equals("login.do") || action.equals("list.do") || action.equals("view.do")) {
-    			return Action.perform(action,request);
-            }
-        	else {
-        		return Action.perform("login.do",request);
-        		}
-        }
-        
-        if (action.equals("welcome")) {
-        	// User is logged in, but at the root of our web app
-			return Action.perform("manage.do",request);
-        }
+        return Action.perform(action,request);
+        //waiting for login page to be ready so that session could be established thats why code is commented
+//        if (employee == null) {
+//        	
+//        	// If the user hasn't logged in, so login is the only option
+//        	if (action.equals("login.doe") || action.equals("list.doe") || action.equals("view.doe")) {
+//    			return Action.perform(action,request);
+//            }
+//        	else {
+//        		return Action.perform("login.doe",request);
+//        		}
+//        }
+//        
+//        if (action.equals("welcome")) {
+//        	// User is logged in, but at the root of our web app
+//			return Action.perform("manage.doe",request);
+//        }
         
       	// Let the logged in user run his chosen action
-		return Action.perform(action,request);
+	//	return Action.perform(action,request);
     }
     
     private void sendToNextPage(String nextPage, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -68,7 +71,8 @@ public class Controller extends HttpServlet {
     	}
     	
     	if (nextPage.endsWith(".jsp")) {
-	   		RequestDispatcher d = request.getRequestDispatcher("WEB-INF/" + nextPage);
+    		//all files are in pages folder rather than web-inf
+	   		RequestDispatcher d = request.getRequestDispatcher(nextPage);
 	   		d.forward(request,response);
 	   		return;
     	}
