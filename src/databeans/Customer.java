@@ -6,11 +6,14 @@ import org.genericdao.PrimaryKey;
 public class Customer {
 	private int customer_id, zip;
 	private String  customerName = null;
+	private String  Password = "*";
 	private String username, password, firstName, lastName, addr_line1, addr_line2, city, state;
 
 	private long cash;   // 2 decimal 
 
 	public String  getCustomerName()       { return customerName;       }
+//<<<<<<< HEAD
+
 
 	//Getter
 	public int getCustomer_id() {
