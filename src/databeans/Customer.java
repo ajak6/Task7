@@ -5,8 +5,12 @@ import org.genericdao.PrimaryKey;
 @PrimaryKey("customer_id")
 public class Customer {
 	private int customer_id, zip;
+	private String  customerName = null;
 	private String username, password, firstName, lastName, addr_line1, addr_line2, city, state;
+
 	private long cash;   // 2 decimal 
+
+	public String  getCustomerName()       { return customerName;       }
 
 	//Getter
 	public int getCustomer_id() {
