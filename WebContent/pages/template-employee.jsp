@@ -39,7 +39,7 @@
 </head>
 
 <body>
-<%@ page import="databeans.Employee" %>
+<%-- <%@ page import="databeans.Employee" %>
 <%
     Employee user = (Employee) session.getAttribute("user");
 	if (user == null) {
@@ -48,7 +48,7 @@
 				<span class="menu-item"><a href="register.do">Register</a></span><br/>
 <%
     } else {
-%>
+%> --%>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -75,7 +75,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="empLogout.doe"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -133,6 +133,6 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-<%
+<%-- <%
 	}
-%>            
+%>    --%>         

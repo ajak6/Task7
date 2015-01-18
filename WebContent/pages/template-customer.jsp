@@ -39,7 +39,7 @@
 </head>
 
 <body>
-<%@ page import="databeans.Customer" %>
+<%-- <%@ page import="databeans.Customer" %>
 <%
 Customer user = (Customer) session.getAttribute("user");
 	if (user == null) {
@@ -48,7 +48,7 @@ Customer user = (Customer) session.getAttribute("user");
 				<span class="menu-item"><a href="register.do">Register</a></span><br/>
 <%
     } else {
-%>
+%> --%>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -125,7 +125,7 @@ Customer user = (Customer) session.getAttribute("user");
             <!-- /.navbar-static-side -->
         </nav>
         
-<%
+<%-- <%
 	}
-%>
+%> --%>
                     
