@@ -39,6 +39,6 @@ public class Model {
 	public FundDAO getFundDAO() { return fundDAO;}
 	public PositionDAO getPositionDAO() { return positionDAO;} 
 	public TransactionDAO getTransactionDAO() { return transactionDAO; }
-	
+	public CustomerDAO  getUserDAO()  { return customerDAO;  }
 	
 }
