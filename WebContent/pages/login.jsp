@@ -39,6 +39,7 @@
                     <div class="panel-body">
                         <form role="form">
                             <fieldset>
+                            <form method="post" action="login.do">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="cEmail" type="email" autofocus>
                                 </div>
@@ -69,6 +70,7 @@
                     </div>
                     <div class="panel-body">
                         <form role="form">
+                        <form method="post" action="login.do">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="eEmail" type="email" autofocus>
