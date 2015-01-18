@@ -6,6 +6,7 @@ import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.GenericDAO;
 import org.genericdao.RollbackException;
+import org.genericdao.Transaction;
 
 import databeans.Employee;
 import databeans.Customer;
@@ -20,6 +21,23 @@ public class EmployeeDAO extends GenericDAO<Employee>{
 		Employee[] users = match();
 		Arrays.sort(users);  // We want them sorted by last and first names (as per User.compareTo());
 		return users;
+	}
+	public void setPassword(String employeeName, String password) throws RollbackException {
+        try {
+        	Transaction.begin();
+			Employee dbUser = read(employeeName);
+			
+			if (dbUser == null) {
+				throw new RollbackException("User "+employeeName+" no longer exists");
+			}
+			
+			dbUser.setPassword(password);
+			
+			update(dbUser);
+			Transaction.commit();
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
 	}
 
 }
