@@ -21,7 +21,7 @@ public class ChangeCpwd extends Action {
 	
 	private CustomerDAO customerDAO;
 
-	public ChangePwdAction(Model model) {
+	public ChangeCpwd(Model model) {
 		customerDAO = model.getUserDAO();
 	}
 
@@ -54,7 +54,7 @@ public class ChangeCpwd extends Action {
 			Customer user = (Customer) request.getSession().getAttribute("user");
 	
 			// Change the password
-			CustomerDAO.setPassword(user.getCustomerName(),form.getNewPassword());
+			customerDAO.setPassword(user.getCustomerName(),form.getNewPassword());
 	
 			request.setAttribute("message","Password changed for "+user.getCustomerName());
 	        return "success.jsp";

@@ -4,6 +4,15 @@ import org.genericdao.PrimaryKey;
 
 @PrimaryKey("username")
 public class Employee {
+	public String getPassword() {
+		return Password;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
 	private String  employeeName = null;
 	private String  Password = "*";
 	public boolean checkPassword(String password) {

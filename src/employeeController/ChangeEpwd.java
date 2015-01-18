@@ -15,12 +15,12 @@ import org.mybeans.form.FormBeanFactory;
 import databeans.Employee;
 import formbeans.ChangePwdForm;
 
-public class ChangePwdAction extends Action {
+public class ChangeEpwd extends Action {
 	private FormBeanFactory<ChangePwdForm> formBeanFactory = FormBeanFactory.getInstance(ChangePwdForm.class);
 	
 	private EmployeeDAO employeeDAO;
 
-	public ChangePwdAction(Model model){
+	public ChangeEpwd(Model model){
 		employeeDAO = model.getEmployeeDAO();
 	}
 
@@ -53,9 +53,9 @@ public class ChangePwdAction extends Action {
 	        Employee user = (Employee) request.getSession().getAttribute("user");
 	
 			// Change the password
-	        employeeDAO.setPassword(user.getUserName(),form.getNewPassword());
+	        employeeDAO.setPassword(user.getEmployeeName(),form.getNewPassword());
 	
-			request.setAttribute("message","Password changed for "+user.getUserName());
+			request.setAttribute("message","Password changed for "+user.getEmployeeName());
 	        return "success.jsp";
         } catch (RollbackException e) {
         	errors.add(e.toString());
