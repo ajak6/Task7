@@ -1,5 +1,4 @@
-<<<<<<< HEAD:src/employeeController/ChangeEpwdAction.java
-package employeeController;
+/*package employeeController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,3 +136,4 @@ public class ChangeEpwd extends Action {
     }
 }
 >>>>>>> b686f3477bead8086d071abd3a6b2dd1191ff9c0:src/employeeController/ChangeEpwd.java
+*/

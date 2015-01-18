@@ -22,11 +22,7 @@ public class ChangeCpwd extends Action {
 	private CustomerDAO customerDAO;
 
 	public ChangeCpwd(Model model) {
-<<<<<<< HEAD
 		customerDAO = model.getCustomerDAO();
-=======
-		customerDAO = model.getUserDAO();
->>>>>>> b686f3477bead8086d071abd3a6b2dd1191ff9c0
 	}
 
 	public String getName() { return "change-pwd.do"; }
@@ -57,12 +53,7 @@ public class ChangeCpwd extends Action {
 	
 			Customer user = (Customer) request.getSession().getAttribute("user");
 	
-			// Change the password
-<<<<<<< HEAD
 		//	CustomerDAO.setPassword(user.getCustomerName(),form.getNewPassword());
-=======
-			customerDAO.setPassword(user.getCustomerName(),form.getNewPassword());
->>>>>>> b686f3477bead8086d071abd3a6b2dd1191ff9c0
 	
 			request.setAttribute("message","Password changed for "+user.getCustomerName());
 	        return "success.jsp";

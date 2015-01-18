@@ -5,19 +5,7 @@ import org.genericdao.PrimaryKey;
 
 @PrimaryKey("username")
 public class Employee {
-<<<<<<< HEAD
-
-=======
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
-	}
->>>>>>> b686f3477bead8086d071abd3a6b2dd1191ff9c0
+	
 	private String  employeeName = null;
 	private String  Password = "*";
 	public boolean checkPassword(String password) {
