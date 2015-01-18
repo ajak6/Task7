@@ -45,10 +45,10 @@
         <div class="col-md-12 column">
             <div class="row clearfix">
                 <div class="col-md-6 column">
-                    <a href="ViewAccount_c.jsp"><button type="button" class="btn btn-lg btn-info btn-block">Customer Login</button></a>
+                    <a href="login.jsp"><button type="button" class="btn btn-lg btn-info btn-block">Customer Login</button></a>
                 </div>
                 <div class="col-md-6 column">
-                    <a href="ViewAccount_e.jsp"><button type="button" class="btn btn-block btn-warning btn-lg">Employee Login</button></a>
+                    <a href="login.jsp"><button type="button" class="btn btn-block btn-warning btn-lg">Employee Login</button></a>
                 </div>
             </div>
         </div>
