@@ -41,10 +41,10 @@
                             <fieldset>
                             <form method="post" action="login.do">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="cEmail" type="email" autofocus>
+                                    <input class="form-control" placeholder="E-mail" name="cEmail" value="${form.cEmail}" type="email" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="cPassword" type="password" value="">
+                                    <input class="form-control" placeholder="Password" name="cPassword" value="${form.cPassword}" type="password">
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -73,10 +73,10 @@
                         <form method="post" action="login.do">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="eEmail" type="email" autofocus>
+                                    <input class="form-control" placeholder="E-mail" name="eEmail" value="${form.eEmail}" type="email" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="ePassword" type="password" value="">
+                                    <input class="form-control" placeholder="Password" name="ePassword" value="${form.ePassword}" type="password">
                                 </div>
                                 <div class="checkbox">
                                     <label>

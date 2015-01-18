@@ -5,6 +5,10 @@ import org.genericdao.PrimaryKey;
 @PrimaryKey("username")
 public class Employee {
 	private String  employeeName = null;
+	private String  Password = "*";
+	public boolean checkPassword(String password) {
+		return Password.equals((password));
+	}
 	private String username, firstName, lastName;
 	public String  getEmployeeName()       { return employeeName;       }
 	//Getter
