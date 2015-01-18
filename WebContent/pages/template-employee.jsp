@@ -39,8 +39,9 @@
 </head>
 
 <body>
+<%@ page import="databeans.Employee" %>
 <%
-    User user = (User) session.getAttribute("user");
+    Employee user = (Employee) session.getAttribute("user");
 	if (user == null) {
 %>
 				<span class="menu-item"><a href="login.do">Login</a></span><br/>
