@@ -1,34 +1,35 @@
-package customerController;
+package employeeController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.genericdao.MatchArg;
+import model.CustomerDAO;
+import model.EmployeeDAO;
+import model.Model;
+
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.Customer;
-import formbeans.CustRegisterForm;
-import formbeans.RequestCheckForm;
-import model.CustomerDAO;
-import model.Model;
+import formbeans.DepositCheckForm;
 
-public class RequestCheckAction extends Action {
-	private FormBeanFactory<RequestCheckForm> formBeanFactory = FormBeanFactory
-			.getInstance(RequestCheckForm.class);
+public class DepositCheckAction extends Action{
+	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory
+			.getInstance(DepositCheckForm.class);
 
+	private EmployeeDAO employeeDAO;
 	private CustomerDAO customerDAO;
 
-	public RequestCheckAction(Model model) {
-		customerDAO = model.getCustomerDAO();
+	public DepositCheckAction(Model model) {
+		employeeDAO = model.getEmployeeDAO();
 	}
 
 	public String getName() {
-		return "request_check.doc";
+		return "deposit_check.doe";
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -36,47 +37,44 @@ public class RequestCheckAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 
-		RequestCheckForm form = null;
+		DepositCheckForm form = null;
 		request.setAttribute("form", form);
 
 		try {
 			form = formBeanFactory.create(request);
 
 			if (!form.isPresent()) {
-				return "requestCheck.jsp";
+				return "depositCheck.jsp";
 			}
 
 			// Any validation errors?
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
-				return "requestCheck.jsp";
+				return "depositCheck.jsp";
 			}
 
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "requestCheck.jsp";
+			return "depositCheck.jsp";
 		}
 
 		try {
 			Transaction.begin();
 			
-			//display current cash balance
-			Customer customer = (Customer) request.getSession(false)
-					.getAttribute("customer");		
-			Long balance = customerDAO.read(customer.getCustomer_id()).getCash();
+			//extract cash balance
+			Customer customer = customerDAO.read(form.getCustomer_id());
+			Long balance = customer.getCash();
 			request.setAttribute("balance", balance);
 			
-			//deduct amount from current balance
-			if (balance > 0) {
-				balance = balance - form.getAmount();
+			//deposit check
+				balance = balance + form.getAmount();
 				customer.setCash(balance);
 				customerDAO.update(customer);
 				
 				Transaction.commit();
 				request.setAttribute("message", "Request Check Successfully");
 				return "requesetCheckSuccess.jsp";
-			} 
-
+			
 			errors.add("The balance is negative.");
 			return "requestCheck.jsp";
 			

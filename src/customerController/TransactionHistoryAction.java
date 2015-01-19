@@ -29,8 +29,9 @@ public class TransactionHistoryAction extends Action{
         
         try{
         	Customer customer = (Customer) request.getSession(false).getAttribute("customer");
-        	request.setAttribute("cash",customerDAO.getBalance(customer.getCustomer_id()));
-       	
+        	Long cash = customerDAO.read(customer.getCustomer_id()).getCash();
+			request.setAttribute("cash", cash);
+
         	return "manage.do";
         	
         } catch (RollbackException e) {
