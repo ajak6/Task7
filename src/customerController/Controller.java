@@ -20,6 +20,7 @@ public class Controller extends HttpServlet {
         Model model = new Model(getServletConfig());
         
         Action.add(new LoginAction(model));
+        Action.add(new RequestCheckAction(model));
   }
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

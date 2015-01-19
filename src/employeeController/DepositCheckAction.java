@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.CustomerDAO;
-import model.EmployeeDAO;
 import model.Model;
 
 import org.genericdao.RollbackException;
@@ -17,19 +16,18 @@ import org.mybeans.form.FormBeanFactory;
 import databeans.Customer;
 import formbeans.DepositCheckForm;
 
-public class DepositCheckAction extends Action{
+public class DepositCheckAction extends Action {
 	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory
 			.getInstance(DepositCheckForm.class);
 
-	private EmployeeDAO employeeDAO;
 	private CustomerDAO customerDAO;
 
 	public DepositCheckAction(Model model) {
-		employeeDAO = model.getEmployeeDAO();
+		customerDAO = model.getCustomerDAO();
 	}
 
 	public String getName() {
-		return "deposit_check.doe";
+		return "depositCheck.doe";
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -59,24 +57,28 @@ public class DepositCheckAction extends Action{
 		}
 
 		try {
+			System.out.println(customerDAO.read("customer_id", form.getCustomer_id()));
+			
 			Transaction.begin();
-			
-			//extract cash balance
-			Customer customer = customerDAO.read(form.getCustomer_id());
-			Long balance = customer.getCash();
-			request.setAttribute("balance", balance);
-			
-			//deposit check
+
+			if (customerDAO.read("customer_id", form.getCustomer_id()) != null) {
+				// extract cash balance
+				Customer customer = customerDAO.read(form.getCustomer_id());
+				Long balance = customer.getCash();
+				request.setAttribute("balance", balance);
+	
+				// deposit check
 				balance = balance + form.getAmount();
 				customer.setCash(balance);
 				customerDAO.update(customer);
-				
+	
 				Transaction.commit();
 				request.setAttribute("message", "Request Check Successfully");
 				return "requesetCheckSuccess.jsp";
-			
-			errors.add("The balance is negative.");
-			return "requestCheck.jsp";
+			} else {
+				errors.add("The customer doesn't exist");
+				return "depositCheck.jsp";
+			}
 			
 		} catch (RollbackException e) {
 			errors.add(e.toString());

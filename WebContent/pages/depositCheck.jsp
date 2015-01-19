@@ -1,8 +1,8 @@
-<jsp:include page="template-customer.jsp" />
+<jsp:include page="template-employee.jsp" />
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Request Check</h1>
+			<h1 class="page-header">Deposit Check</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -15,11 +15,11 @@
 						<div class="col-lg-6">
 							<form role="form">
 								<div class="form-group">
-									<label>Current Balance: </label>
-									<p class="form-control-static">10000</p>
+									<label>Input Customer ID</label> <input class="form-control"
+										placeholder="Enter customer ID">
 								</div>
 								<div class="form-group">
-									<label>Cash to withdrawal</label> <input class="form-control"
+									<label>Cash to Deposit</label> <input class="form-control"
 										placeholder="Enter amount">
 								</div>
 								<button type="submit" class="btn btn-default">Submit</button>

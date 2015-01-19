@@ -119,7 +119,7 @@
                             <a href="ViewAccount_e.jsp"><i class="fa fa-files-o fa-fw"></i> View Customer Account </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Deposit Check </a>
+                            <a href="depositCheck.doe"> <i class="fa fa-money fa-fw"></i> Deposit Check </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-dollar fa-fw"></i> Create Fund </a>

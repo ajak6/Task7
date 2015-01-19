@@ -28,7 +28,7 @@ public class RequestCheckAction extends Action {
 	}
 
 	public String getName() {
-		return "request_check.doc";
+		return "requestCheck.doc";
 	}
 
 	public String perform(HttpServletRequest request) {

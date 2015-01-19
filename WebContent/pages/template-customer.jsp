@@ -116,7 +116,7 @@ Customer user = (Customer) session.getAttribute("user");
                             <a href="Research Fund.jsp"><i class="fa fa-book fa-fw"></i> Research Fund </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Request Check </a>
+                            <a href="depositCheck.doe"><i class="fa fa-money fa-fw"></i> Request Check </a>
                         </li>
                     </ul>
                 </div>
