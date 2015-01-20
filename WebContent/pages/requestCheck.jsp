@@ -20,7 +20,7 @@
 								</div>
 								<div class="form-group">
 									<label>Cash to withdrawal</label> <input class="form-control"
-										placeholder="Enter amount">
+										placeholder="Enter amount" name="amount" type="text">
 								</div>
 								<button type="submit" class="btn btn-default">Submit</button>
 							</form>
