@@ -125,7 +125,7 @@
                             <a href="#"><i class="fa fa-dollar fa-fw"></i> Create Fund </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-calendar fa-fw"></i> Transition Day </a>
+                            <a href="transitionday.html"><i class="fa fa-calendar fa-fw"></i> Transition Day </a>
                         </li>
                     </ul>
                 </div>
