@@ -5,14 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.Customer;
-import formbeans.CustRegisterForm;
 import formbeans.RequestCheckForm;
 import model.CustomerDAO;
 import model.Model;
@@ -63,15 +61,16 @@ public class RequestCheckAction extends Action {
 			//display current cash balance
 			Customer customer = (Customer) request.getSession(false)
 					.getAttribute("customer");		
-			Long balance = customerDAO.read(customer.getCustomer_id()).getCash();
+			long balance = customerDAO.read(customer.getCustomer_id()).getCash();
 			request.setAttribute("balance", balance);
-			
+			System.out.print(balance);
 			//deduct amount from current balance
 			if (balance > 0) {
-				balance = balance - form.getAmount();
+				balance = balance - Long.parseLong(form.getCusBalance());
 				customer.setCash(balance);
 				customerDAO.update(customer);
 				
+				System.out.print(balance);
 				Transaction.commit();
 				request.setAttribute("message", "Request Check Successfully");
 				return "requesetCheckSuccess.jsp";

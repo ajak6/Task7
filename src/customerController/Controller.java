@@ -36,9 +36,9 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
-        Customer    customer = (Customer) session.getAttribute("customer");
+ //       Customer    customer = (Customer) session.getAttribute("customer");
         String      action = getActionName(servletPath);
-        
+ /*       
         if (customer == null) {
         	
         	// If the user hasn't logged in, so login is the only option
@@ -49,12 +49,12 @@ public class Controller extends HttpServlet {
         		return Action.perform("login.do",request);
         		}
         }
-        
+       
         if (action.equals("welcome")) {
         	// User is logged in, but at the root of our web app
 			return Action.perform("manage.do",request);
         }
-        
+     */   
       	// Let the logged in user run his chosen action
 		return Action.perform(action,request);
     }

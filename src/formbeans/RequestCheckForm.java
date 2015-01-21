@@ -6,15 +6,15 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class RequestCheckForm extends FormBean{
-	private long amount;
+	private String cusBalance;
 	
-	public long getAmount() { return amount;}
-	public void setAmount(long l) { amount = l; }
+	public String getCusBalance() { return cusBalance;}
+	public void setCusBalance(String s) { cusBalance = trimAndConvert(s, "<>\""); }
 	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (amount <= 0) {
+		if (Long.parseLong(cusBalance) <= 0) {
 			errors.add("Amount must be positive");
 		}
 		

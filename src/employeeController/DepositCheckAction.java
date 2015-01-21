@@ -68,7 +68,7 @@ public class DepositCheckAction extends Action {
 				request.setAttribute("balance", balance);
 	
 				// deposit check
-				balance = balance + form.getAmount();
+				balance = balance + Long.parseLong(form.getCusBalance());
 				customer.setCash(balance);
 				customerDAO.update(customer);
 	
