@@ -9,7 +9,7 @@ import org.genericdao.DAOException;
 public class Model {
 	private CustomerDAO customerDAO;
 	private EmployeeDAO employeeDAO;
-	private Fund_Price_HistoryDAO fund_Price_HistoryDAO;
+	private Fund_Price_HistoryDAO fundPriceHistoryDAO;
 	private FundDAO fundDAO;
 	private PositionDAO positionDAO;
 	private TransactionDAO transactionDAO;
@@ -23,7 +23,7 @@ public class Model {
 			
 			customerDAO  = new CustomerDAO("Customer", pool);
 			employeeDAO = new EmployeeDAO("Employee", pool);
-			fund_Price_HistoryDAO = new Fund_Price_HistoryDAO("Fund_Price_History", pool);
+			fundPriceHistoryDAO = new Fund_Price_HistoryDAO("Fund_Price_History", pool);
 			fundDAO = new FundDAO("Fund", pool);
 			positionDAO = new PositionDAO("Position", pool);
 			transactionDAO = new TransactionDAO("Transaction", pool);
@@ -33,9 +33,13 @@ public class Model {
 		}
 	}
 	
+	public void setFund_Price_HistoryDAO(Fund_Price_HistoryDAO fundPriceHistoryDAO) {
+		this.fundPriceHistoryDAO = fundPriceHistoryDAO;
+	}
+
 	public CustomerDAO getCustomerDAO()  { return customerDAO; }
 	public EmployeeDAO getEmployeeDAO()  { return employeeDAO; }
-	public Fund_Price_HistoryDAO getFund_Price_HistoryDAO() { return fund_Price_HistoryDAO;}
+	public Fund_Price_HistoryDAO getFund_Price_HistoryDAO() { return fundPriceHistoryDAO;}
 	public FundDAO getFundDAO() { return fundDAO;}
 	public PositionDAO getPositionDAO() { return positionDAO;} 
 	public TransactionDAO getTransactionDAO() { return transactionDAO; }

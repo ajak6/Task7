@@ -20,8 +20,9 @@ public class Controller extends HttpServlet {
         Model model = new Model(getServletConfig());
         
         Action.add(new LoginAction(model));
-        Action.add(new RequestCheckAction(model));
-  }
+   //     Action.add(new RequestCheckAction(model));
+        Action.add(new FundResearchAction(model));
+	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
@@ -41,7 +42,7 @@ public class Controller extends HttpServlet {
         if (customer == null) {
         	
         	// If the user hasn't logged in, so login is the only option
-        	if (action.equals("login.do") || action.equals("list.do") || action.equals("view.do")) {
+        	if (action.equals("fundResearch.doc") || action.equals("login.do") || action.equals("list.do") || action.equals("view.do")) {
     			return Action.perform(action,request);
             }
         	else {
@@ -70,7 +71,7 @@ public class Controller extends HttpServlet {
     	}
     	
     	if (nextPage.endsWith(".jsp")) {
-	   		RequestDispatcher d = request.getRequestDispatcher("WEB-INF/" + nextPage);
+	   		RequestDispatcher d = request.getRequestDispatcher(nextPage);
 	   		d.forward(request,response);
 	   		return;
     	}
