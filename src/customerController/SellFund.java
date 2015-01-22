@@ -51,11 +51,6 @@ public class SellFund extends Action{
 				
 				transactionDAO.create(trans);
 				request.setAttribute("customer", customer);
-				long share = positionDAO.read(customer.getCustomer_id(), fundToSell.getFund_id()).getShares() - sellShare;
-				
-				
-				positionDAO.changeShare(customer.getCustomer_id(), fundToSell.getFund_id(), share);
-				
 				return "managefund.do";
 			}else{
 				errors.add("Not enough fund to sell!");
