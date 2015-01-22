@@ -1,3 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="databeans.Position"%>
+<%@ page import="databeans.Customer"%>
+<%@ page import="databeans.Fund"%>
+<%@ page import="databeans.Fund_Price_History"%>
 <jsp:include page="template-employee.jsp" />
 <div id="page-wrapper">
             <div class="row">
@@ -10,14 +15,27 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" id="username" placeholder="Username...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                </div>
+            </div>
+            <c:if test="${item['target']!=null}">
+            <div class="row">
+                <div class="col-lg-8">
                     <table class="table">
                 <tbody>
                     <tr class="active">
                         <td>
-                            Name
+                            Name:
                         </td>
                         <td>
-                            Stella Long
+                            <c:out value="${target.customerName}" />
                         </td>
                     </tr>
                     <tr class="success">
@@ -25,7 +43,7 @@
                             Address
                         </td>
                         <td>
-                            3000 Centre Ave, Apt. 101
+                             <c:out value="${target.addr_line1}+,+${target.addr_line2}+,+${target.city}" />
                         </td>
                     </tr>
                     <tr class="active">
@@ -33,7 +51,7 @@
                             Last Trading Day
                         </td>
                         <td>
-                            01/10/2015
+                            <c:out value="${date}" />
                         </td>
                     </tr>
                     <tr class="success">
@@ -41,7 +59,7 @@
                             Cash Balance ($)
                         </td>
                         <td>
-                            100,000,000
+                           <c:out value="${target.cash}" />
                         </td>
                     </tr>
                 </tbody>
@@ -61,43 +79,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                <c:forEach var = "position" items = "${positionList}">
                     <tr class="danger">
                         <td>
-                            Fund 1
+                            ${position.fund_id}
                         </td>
                         <td>
-                            100,000
+                            ${position.shares}
                         </td>
                         <td>
-                            90,000,000
+                            <c:out value="${price}" />
                         </td>
                     </tr>
-                    <tr class="active">
-                        <td>
-                            Fund 2
-                        </td>
-                        <td>
-                            10,000
-                        </td>
-                        <td>
-                            200,000
-                        </td>
-                    </tr>
-                    <tr class="danger">
-                        <td>
-                            Fund 3
-                        </td>
-                        <td>
-                            30,000
-                        </td>
-                        <td>
-                            1,500,000
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
                 </div>
             </div>
+            </c:if>
             <!-- /.row -->
         </div>
         <jsp:include page="template-bottom.jsp" />

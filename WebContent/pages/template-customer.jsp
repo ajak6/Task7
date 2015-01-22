@@ -88,17 +88,7 @@ Customer user = (Customer) session.getAttribute("user");
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
+                 
                         <li>
                             <a href="ViewAccount_c.jsp"><i class="fa fa-user fa-fw"></i> User Profile </a>
                         </li>
@@ -108,7 +98,7 @@ Customer user = (Customer) session.getAttribute("user");
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dollar fa-fw"></i> Sell Fund </a>
+                            <a href="managefund.do"><i class="fa fa-dollar fa-fw"></i> Sell Fund </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-history fa-fw"></i> Transaction History </a>
