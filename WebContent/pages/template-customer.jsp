@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+<!-- Custom Theme JavaScript -->
+	
     <title>Carnegie Financial Services</title>
 
     <!-- Bootstrap Core CSS -->
@@ -72,10 +73,10 @@ Customer user = (Customer) session.getAttribute("user");
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="ViewAccount_c.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+                        <li><a href="changpwd.doc"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="logout.doc"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

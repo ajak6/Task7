@@ -1,6 +1,5 @@
 package customerController;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -15,76 +14,85 @@ import databeans.Customer;
 
 @SuppressWarnings("serial")
 public class Controller extends HttpServlet {
-
 	public void init() throws ServletException {
-        Model model = new Model(getServletConfig());
-        
-        Action.add(new LoginAction(model));
-   //     Action.add(new RequestCheckAction(model));
-        Action.add(new FundResearchAction(model));
-	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
-    }
+		Model model = new Model(getServletConfig());
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nextPage = performTheAction(request);
-        sendToNextPage(nextPage,request,response);
-    }
-    
-    private String performTheAction(HttpServletRequest request) {
-        HttpSession session     = request.getSession(true);
-        String      servletPath = request.getServletPath();
- //       Customer    customer = (Customer) session.getAttribute("customer");
-        String      action = getActionName(servletPath);
- /*       
-        if (customer == null) {
-        	
-        	// If the user hasn't logged in, so login is the only option
-        	if (action.equals("fundResearch.doc") || action.equals("login.do") || action.equals("list.do") || action.equals("view.do")) {
-    			return Action.perform(action,request);
-            }
-        	else {
-        		return Action.perform("login.do",request);
-        		}
-        }
-       
-        if (action.equals("welcome")) {
-        	// User is logged in, but at the root of our web app
-			return Action.perform("manage.do",request);
-        }
-     */   
-      	// Let the logged in user run his chosen action
-		return Action.perform(action,request);
-    }
-    
-    private void sendToNextPage(String nextPage, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-    	if (nextPage == null) {
-    		response.sendError(HttpServletResponse.SC_NOT_FOUND,request.getServletPath());
-    		return;
-    	}
-    	
-    	if (nextPage.endsWith(".do")) {
+		Action.add(new LoginAction(model));
+		Action.add(new RequestCheckAction(model));
+		Action.add(new FundResearchAction(model));
+		Action.add(new ChangeCustomerPasswordAction(model));
+		Action.add(new LogoutAction(model));
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String nextPage = performTheAction(request);
+		sendToNextPage(nextPage, request, response);
+	}
+
+	private String performTheAction(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String servletPath = request.getServletPath();
+		String action = getActionName(servletPath);
+		// will be set in the customer to check whether user is a customer or
+		// employee
+		// if employee access this page wont be allows and will be direct to
+		// access denied or page not found wrong url message
+		System.out.println("session " + session);
+		Object customer = session.getAttribute("user");
+		if (customer == null) {
+			System.out.println("customer null");
+			return Action.perform("login.doc", request);
+		}
+		if (!(customer instanceof Customer)) {
+			return Action.perform("login.doc", request);
+		}
+		System.out.println("Customer from session " + customer);
+
+		System.out.println("creation time of session "
+				+ session.getCreationTime());
+
+		// Let the logged in user run his chosen action
+		return Action.perform(action, request);
+
+	}
+
+	private void sendToNextPage(String nextPage, HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+		if (nextPage == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND,
+					request.getServletPath());
+			return;
+		}
+
+		if (nextPage.endsWith(".doc")) {
 			response.sendRedirect(nextPage);
 			return;
-    	}
-    	
-    	if (nextPage.endsWith(".jsp")) {
-	   		RequestDispatcher d = request.getRequestDispatcher(nextPage);
-	   		d.forward(request,response);
-	   		return;
-    	}
-    	
-    	response.sendRedirect(nextPage);
-    	return;
-   // 	throw new ServletException(Controller.class.getName()+".sendToNextPage(\"" + nextPage + "\"): invalid extension.");
-    }
-    
-    private String getActionName(String path) {
-    	// We're guaranteed that the path will start with a slash
-        int slash = path.lastIndexOf('/');
-        return path.substring(slash+1);
-    }
+		}
+
+		if (nextPage.endsWith(".jsp")) {
+			RequestDispatcher d = request
+					.getRequestDispatcher(nextPage);
+			d.forward(request, response);
+			return;
+		}
+
+		response.sendRedirect(nextPage);
+		return;
+		// throw new
+		// ServletException(Controller.class.getName()+".sendToNextPage(\"" +
+		// nextPage + "\"): invalid extension.");
+	}
+
+	private String getActionName(String path) {
+		// We're guaranteed that the path will start with a slash
+		int slash = path.lastIndexOf('/');
+		return path.substring(slash + 1);
+	}
 
 }

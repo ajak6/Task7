@@ -72,7 +72,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="ViewAccount_e.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+                        <li><a href="changpwd.doe"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="empLogout.doe"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

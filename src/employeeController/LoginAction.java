@@ -5,63 +5,64 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.Model;
 import model.EmployeeDAO;
+import model.Model;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.Employee;
-import formbeans.LoginForm;
+import formbeans.LoginFormEmp;
+
 public class LoginAction extends Action{
-	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory.getInstance(LoginForm.class);
+	private FormBeanFactory<LoginFormEmp> formBeanFactory = FormBeanFactory.getInstance(LoginFormEmp.class);
 	private EmployeeDAO employeeDAO;
 
 	public LoginAction(Model model) {
 		employeeDAO = model.getEmployeeDAO();
 	}
 
-	public String getName() { return "login.do"; }
+	public String getName() { return "login.doe"; }
     
     public String perform(HttpServletRequest request) {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
         try {
-	    	LoginForm form = formBeanFactory.create(request);
+	    	LoginFormEmp form = formBeanFactory.create(request);
 	        request.setAttribute("form",form);
 	        if (!form.isPresent()) {
-	            return "login.jsp";
+	            return "elogin.jsp";
 	        }
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
-	            return "login.jsp";
+	            return "elogin.jsp";
 	        }
 	        Employee employee = employeeDAO.read(form.geteEmail());
 	        
 	        if (employee == null) {
 	            errors.add("User Name not found");
-	            return "login.jsp";
+	            return "elogin.jsp";
 	        }
 
 	        // Check the password
-	        if (!employee.checkPassword(form.getePassword())) {
+	        if (!employee.getPassword().equals(form.getePassword())) {
 	            errors.add("Incorrect password");
-	            return "login.jsp";
+	            return "elogin.jsp";
 	        }
-	
+	System.out.println("successful login of employee ");
 	        // Attach (this copy of) the user bean to the session
 	        HttpSession session = request.getSession();
-	        session.setAttribute("employee",employee);
-
-	        return "manage.do";
+	        session.setAttribute("user",employee);
+			session.setMaxInactiveInterval(60*10);
+	        return "ViewAccount_e.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";
         } catch (FormBeanException e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "elogin.jsp";
         }
     }
 }

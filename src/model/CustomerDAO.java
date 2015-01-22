@@ -23,13 +23,14 @@ public class CustomerDAO extends GenericDAO<Customer>{
 		return users;
 	}
 	
-	public void setPassword(String customerName, String password) throws RollbackException {
+	public void changePassword(int customerID, String password) throws RollbackException {
         try {
+        	System.out.println("in change pass word method");
         	Transaction.begin();
-			Customer dbUser = read(customerName);
+			Customer dbUser = read(customerID);
 			
 			if (dbUser == null) {
-				throw new RollbackException("User "+customerName+" no longer exists");
+				throw new RollbackException("User  no longer exists");
 			}
 			
 			dbUser.setPassword(password);

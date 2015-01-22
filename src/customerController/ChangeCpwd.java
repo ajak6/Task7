@@ -1,4 +1,4 @@
-package customerController;
+/*package customerController;
 
 
 import java.util.ArrayList;
@@ -66,3 +66,4 @@ public class ChangeCpwd extends Action {
         }
     }
 }
+*/

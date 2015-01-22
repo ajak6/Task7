@@ -1,4 +1,4 @@
-package employeeController;
+package customerController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,23 +6,22 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.EmployeeDAO;
+import model.CustomerDAO;
 import model.Model;
 
 import org.genericdao.RollbackException;
-import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Employee;
+import databeans.Customer;
+
 import formbeans.ChangePwdForm;
 
-public class ChangeEpwdAction extends Action {
-	String EMPLOYEE = "00xxemployeexx";
-	EmployeeDAO employeeDAO;
+public class ChangeCustomerPasswordAction extends Action {
+	CustomerDAO customerDAO;
 
-	public ChangeEpwdAction(Model model) {
-		employeeDAO = model.getEmployeeDAO();
+	public ChangeCustomerPasswordAction(Model model) {
+		customerDAO = model.getCustomerDAO();
 	}
 
 	FormBeanFactory<ChangePwdForm> changeFact = FormBeanFactory
@@ -30,12 +29,12 @@ public class ChangeEpwdAction extends Action {
 
 	@Override
 	public String getName() {
-		return "changpwd.doe";
+		return "changpwd.doc";
 	}
 
 	@Override
 	public String perform(HttpServletRequest request) {
-		System.out.println("changing password");
+System.out.println("changing password");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		HttpSession session = request.getSession(false);
@@ -43,9 +42,9 @@ public class ChangeEpwdAction extends Action {
 
 		if (session == null) {
 			errors.add("Session expired Please login again");
-			return "login.doe";
+			return "login.jsp";
 		}
-		
+	
 		ChangePwdForm changeForm = null;
 		try {
 			changeForm = changeFact.create(request);
@@ -54,37 +53,30 @@ public class ChangeEpwdAction extends Action {
 		}
 
 		if (!changeForm.isPresent()) {
-			return "EchangePass.jsp";
+			return "changePass.jsp";
 		}
 		errors.addAll(changeForm.getValidationErrors());
 		if (errors.size() != 0) {
-			return "EchangePass.jsp";
+			return "changePass.jsp";
 		}
-		// System.out.println("passed all problems ");
-		Employee c = (Employee) session.getAttribute("user");
-
+//		System.out.println("passed all problems ");
+		Customer c = (Customer) session.getAttribute("user");
+		
 		if (!c.getPassword().equals(changeForm.getOldPassword())) {
 			errors.add("Current password is wrong Please try again");
-			return "EchangePass.jsp";
-		} else {
-			// change the password and send a success message
+			return "changePass.jsp";
+		}
+		else{
+			//change the password and send a success message
 			try {
-				Transaction.begin();
-				Employee e = employeeDAO.read(c.getUsername());
-				e.setPassword(changeForm.getNewPassword());
-				employeeDAO.update(e);
-				Transaction.commit();
-				return "EpassChanged.jsp";
+				customerDAO.changePassword(c.getCustomer_id(),
+						changeForm.getNewPassword());
+				return "passChanged.jsp";
 			} catch (RollbackException e) {
 				e.printStackTrace();
-			}finally{
-				if(Transaction.isActive()){
-					Transaction.rollback();
-				}
 			}
-
-			request.setAttribute("message", message);
-			return null;
 		}
+		request.setAttribute("message", message);
+		return null;
 	}
 }

@@ -33,7 +33,7 @@ public abstract class Action {
         	a = hash.get(name);
         }
         
-        if (a == null) return null;
+        if (a == null) return "dead.jsp";
         return a.perform(request);
     }
 }

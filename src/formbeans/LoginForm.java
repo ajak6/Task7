@@ -13,15 +13,11 @@ public class LoginForm extends FormBean {
 	public String getcEmail() {
 		return cEmail;
 	}
-	public String geteEmail() {
-		return eEmail;
-	}
+
 	public String getcPassword() {
 		return cPassword;
 	}
-	public String getePassword() {
-		return ePassword;
-	}
+	
 	public void setcEmail(String s) { cEmail = trimAndConvert(s,"<>\"");  }
 	public void setcPassword(String s) {cPassword = s.trim();                  }
 	public void seteEmail(String s) { eEmail = trimAndConvert(s,"<>\"");  }
@@ -31,18 +27,14 @@ public class LoginForm extends FormBean {
 		List<String> errors = new ArrayList<String>();
 
 		if (cEmail == null || cEmail.length() == 0) {
-			errors.add("User Name is required");
+			errors.add("Please enter username");
 		}
-		if (eEmail == null || eEmail.length() == 0) {
-			errors.add("User Name is required");
-		}
+	
 		
 		if (cPassword == null || cPassword.length() == 0) {
-			errors.add("Password is required");
+			errors.add("Please enter password");
 		}
-		if (ePassword == null || ePassword.length() == 0) {
-			errors.add("Password is required");
-		}		
+		
 		return errors;
 	}
 }
