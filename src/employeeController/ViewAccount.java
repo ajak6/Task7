@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.genericdao.RollbackException;
 
 import databeans.Customer;
+import databeans.FundInfo;
 import databeans.Position;
 import databeans.Transaction;
 import model.CustomerDAO;
@@ -43,37 +44,35 @@ public class ViewAccount extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		try {
-			Customer customer = (Customer) request.getSession(false)
-					.getAttribute("username");
-			request.setAttribute("target", customer);
-			Position[] positionList = positionDAO.getPositions(customer
-					.getCustomer_id());
-			request.setAttribute("positionList", positionList);
-			Transaction[] tran = transactionDAO.getTransaction(customer
-					.getCustomer_id());
-			String date = null;
-			if (tran.length > 0) {
-				for (int i = 0; i < tran.length - 1; i++) {
-					if (tran[i + 1].getTransaction_id() > tran[i]
-							.getTransaction_id()) {
-						date = tran[i + 1].getExecute_date();
-					}
+			 Customer customer = (Customer) request.getSession(false).getAttribute("customer");
+	            request.setAttribute("target", customer);
+	            Transaction[] tran = transactionDAO.getTransaction(customer.getCustomer_id());
+	            String date = null;
+	            if(tran.length>0){
+	            	for(int i=0;i<tran.length-1;i++){
+	            		if(tran[i+1].getTransaction_id()>tran[i].getTransaction_id()){
+	            			date = tran[i+1].getExecute_date();
+	            		}
+	            	}
+	            }
+	            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
+	            Date last = null;
+				try {
+					last = sdf.parse(date);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+	            request.setAttribute("date", last);
+				Position[] positionList = positionDAO.getPositions(customer.getCustomer_id());
+				FundInfo[] fundInfoList = new FundInfo[positionList.length];
+				for(int i=0;i<fundInfoList.length;i++){
+					fundInfoList[i].setName(fundDAO.read(positionList[i].getFund_id()).getName());
+					fundInfoList[i].setShares(positionList[i].getShares());
+					fundInfoList[i].setFund_id(positionList[i].getFund_id());
+					fundInfoList[i].setPrice(fundPriceDAO.getLastPrice(positionList[i].getFund_id()));
 				}
-			}
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 小写的mm表示的是分钟
-			Date last = null;
-			try {
-				last = sdf.parse(date);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("date", last);
-			long[] price = new long[positionList.length];
-			for(int i = 0; i < price.length ; i++){
-				price[i] = fundPriceDAO.getLastPrice(positionList[i].getFund_id());
-			}
-			request.setAttribute("price", price);
+				request.setAttribute("fundInfoList", fundInfoList);
 			return "ViewAccount_e.jsp";
 		} catch (RollbackException e) {
 			e.printStackTrace();

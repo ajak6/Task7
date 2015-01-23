@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.genericdao.RollbackException;
 
 import databeans.Customer;
+import databeans.FundInfo;
 import databeans.Position;
 import databeans.Transaction;
 import model.CustomerDAO;
@@ -40,9 +41,9 @@ public class ViewAccount extends Action{
 	}
 
 	public String perform(HttpServletRequest request) {
+		List<String> errors = new ArrayList<String>();
+        request.setAttribute("errors",errors);
         try {
-        	List<String> errors = new ArrayList<String>();
-            request.setAttribute("errors",errors);
             Customer customer = (Customer) request.getSession(false).getAttribute("customer");
             request.setAttribute("target", customer);
             Transaction[] tran = transactionDAO.getTransaction(customer.getCustomer_id());
@@ -54,7 +55,7 @@ public class ViewAccount extends Action{
             		}
             	}
             }
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟   
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
             Date last = null;
 			try {
 				last = sdf.parse(date);
@@ -64,12 +65,14 @@ public class ViewAccount extends Action{
 			}  
             request.setAttribute("date", last);
 			Position[] positionList = positionDAO.getPositions(customer.getCustomer_id());
-			request.setAttribute("positionList", positionList);
-			long[] price = new long[positionList.length];
-			for(int i = 0; i < price.length ; i++){
-				price[i] = fundPriceDAO.getLastPrice(positionList[i].getFund_id());
+			FundInfo[] fundInfoList = new FundInfo[positionList.length];
+			for(int i=0;i<fundInfoList.length;i++){
+				fundInfoList[i].setName(fundDAO.read(positionList[i].getFund_id()).getName());
+				fundInfoList[i].setShares(positionList[i].getShares());
+				fundInfoList[i].setFund_id(positionList[i].getFund_id());
+				fundInfoList[i].setPrice(fundPriceDAO.getLastPrice(positionList[i].getFund_id()));
 			}
-			request.setAttribute("price", price);
+			request.setAttribute("fundInfoList", fundInfoList);
 			return "ViewAccount_c.jsp";
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block

@@ -16,12 +16,14 @@
             <div class="row">
                 <div class="col-lg-8">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" id="username" placeholder="Username...">
+                            <form action="view_account_e.do">
+                            <input type="text" class="form-control" id="username" placeholder="Username...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
+                            </form>
                             </div>
                 </div>
             </div>
@@ -79,16 +81,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var = "position" items = "${positionList}">
+                <c:forEach var = "fundInfo" items = "${fundInfoList}">
                     <tr class="danger">
                         <td>
-                            ${position.fund_id}
+                            ${fundInfo.fund_id}
                         </td>
                         <td>
-                            ${position.shares}
+                            ${fundInfo.shares}
                         </td>
                         <td>
-                            <c:out value="${price}" />
+                            ${fundInfo.price}
                         </td>
                     </tr>
                     </c:forEach>
