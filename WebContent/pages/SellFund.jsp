@@ -22,41 +22,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="position" items="${positionList}">
+					<c:forEach var="fundInfo" items="${fundInfoList}">
 						<tr class="active">
 							<form method="POST" action="sellfund.do">
-							<td>position.fund_id<input type="hidden" name="fundToSell" value="${position.fund_id}" /></td>
-							<td>position.shares</td>
+							<td>fundInfo.name<input type="hidden" name="fundToSell" value="${fundInfo.fund_id}" /></td>
+							<td>fundInfo.shares</td>
 							<td><input type="number" name="sellshare"></td>
 						    <td><input type="submit" value="Sell" /></td>
 							</form>
 						</tr>
-						
-
 					</c:forEach>
 				</tbody>
 			</table>
 
-			<table class="table">
-				<tbody>
-					<tr class="active">
-						<td>Name</td>
-						<td>Stella Long</td>
-					</tr>
-					<tr class="success">
-						<td>Address</td>
-						<td>3000 Centre Ave, Apt. 101</td>
-					</tr>
-					<tr class="active">
-						<td>Last Trading Day</td>
-						<td>01/10/2015</td>
-					</tr>
-					<tr class="success">
-						<td>Cash Balance ($)</td>
-						<td>100,000,000</td>
-					</tr>
-				</tbody>
-			</table>
 
 		</div>
 	</div>

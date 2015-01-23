@@ -67,16 +67,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var = "position" items = "${positionList}">
+                <c:forEach var = "fundInfo" items = "${fundInfoList}">
                     <tr class="danger">
                         <td>
-                            ${position.fund_id}
+                            ${fundInfo.name}
                         </td>
                         <td>
-                            ${position.shares}
+                            ${fundInfo.shares}
                         </td>
                         <td>
-                            <c:out value="${price}" />
+                            ${fundInfo.price}
                         </td>
                     </tr>
                     </c:forEach>
