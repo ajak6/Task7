@@ -26,7 +26,9 @@ public class Controller extends HttpServlet {
 		Action.add(new DepositCheckAction(model));
 		Action.add(new LogoutAction(model));
 		Action.add(new ChangeEpwdAction(model));
-		Action.add(new EmpViewTransactionHistoryAction(model));
+		Action.add(new CreateFund(model));
+		Action.add(new ViewAccount(model));
+		//Action.add(new EmpViewTransactionHistoryAction(model));
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
