@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.GenericDAO;
@@ -17,5 +19,9 @@ public class TransactionDAO extends GenericDAO<Transaction>{
 		return match(MatchArg.equals("customer_id", customerID));
 	}
 	
-
+	public Transaction[] getTransactinoList(int customer_id) throws RollbackException{
+		Transaction[] list = match(MatchArg.equals("customer_id",customer_id));
+		Arrays.sort(list);
+		return list;
+	}
 }

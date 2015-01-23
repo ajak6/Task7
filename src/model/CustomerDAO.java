@@ -22,6 +22,29 @@ public class CustomerDAO extends GenericDAO<Customer>{
 		Arrays.sort(users); 
 		return users;
 	}
+	public long getBalance(int customer_id) throws RollbackException{
+		Customer[] list = match(MatchArg.equals("customer_id",customer_id));
+		long cash = list[0].getCash();
+		return cash;
+	}
+	
+	public void withdrawalCash(int customer_id, long amount) throws RollbackException{
+		Customer[] list = match(MatchArg.equals("customer_id",customer_id));
+		long cash = list[0].getCash();
+		cash = cash - amount;
+		return;
+	}
+	public int getCustomerId(String customerName) throws RollbackException{
+		Customer[] users = match(MatchArg.equals("customerName", customerName));
+		int userId = users[0].getCustomer_id();
+		return userId;
+	}
+	public void changeBalance(int customer_id, long amount)throws RollbackException{
+		Customer[] list = match(MatchArg.equals("customer_id",customer_id));
+		long cash = list[0].getCash();
+		cash = cash - amount;
+		return;
+	}
 	
 	public void changePassword(int customerID, String password) throws RollbackException {
         try {

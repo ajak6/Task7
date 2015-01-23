@@ -22,6 +22,9 @@ public class Controller extends HttpServlet {
 		Action.add(new FundResearchAction(model));
 		Action.add(new ChangeCustomerPasswordAction(model));
 		Action.add(new LogoutAction(model));
+		Action.add(new BuyFundAction(model));
+		Action.add(new CusViewTransactionHistoryAction(model));
+		
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

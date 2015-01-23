@@ -5,8 +5,27 @@ import org.genericdao.PrimaryKey;
 @PrimaryKey("transaction_id")
 public class Transaction {
 	private int transaction_id, customer_id, fund_id;
-	private String execute_date, transaction_type;
-	private long shares, amount;    
+	private String execute_date, transaction_type, fund_name;
+	private long share_price;
+	private long shares, amount;
+	
+	public long getShare_price() {
+		return share_price;
+	}
+
+	public void setShare_price(long share_price) {
+		this.share_price = share_price;
+	}
+
+	public String getFund_Name() {
+		return fund_name;
+	}
+
+	public void setFund_Name(String fund_name) {
+		this.fund_name = fund_name;
+	}
+
+    
 
 	//Getter
 	public int getTransaction_id() {
