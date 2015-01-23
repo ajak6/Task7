@@ -37,7 +37,7 @@ public class ViewAccount extends Action{
 	}
 	
 	public String getName() {
-		return "view_account_c.do";
+		return "view_account_c.doc";
 	}
 
 	public String perform(HttpServletRequest request) {

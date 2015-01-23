@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-lg-8">
                             <div class="input-group custom-search-form">
-                            <form action="view_account_e.do">
+                            <form action="view_account_e.doe">
                             <input type="text" class="form-control" id="username" placeholder="Username...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">

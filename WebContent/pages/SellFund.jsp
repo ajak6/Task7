@@ -24,7 +24,7 @@
 				<tbody>
 					<c:forEach var="fundInfo" items="${fundInfoList}">
 						<tr class="active">
-							<form method="POST" action="sellfund.do">
+							<form method="POST" action="sellfund.doc">
 							<td>fundInfo.name<input type="hidden" name="fundToSell" value="${fundInfo.fund_id}" /></td>
 							<td>fundInfo.shares</td>
 							<td><input type="number" name="sellshare"></td>

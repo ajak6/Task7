@@ -30,7 +30,7 @@ public class SellFund extends Action{
 	}
 
 	public String getName() {
-		return "sellfund.do";
+		return "sellfund.doc";
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -51,7 +51,7 @@ public class SellFund extends Action{
 				
 				transactionDAO.create(trans);
 				request.setAttribute("customer", customer);
-				return "managefund.do";
+				return "managefund.doc";
 			}else{
 				errors.add("Not enough fund to sell!");
 				return "error.jsp";
